@@ -1,5 +1,6 @@
 using System;
 using DataSources;
+using Scenery;
 using UnityEngine;
 
 namespace Game
@@ -9,6 +10,8 @@ namespace Game
         [SerializeField] private string playId = "Play";
         [SerializeField] private string exitId = "Exit";
         [SerializeField] private DataSource<GameManager> gameManagerDataSource;
+        [SerializeField] private DataSource<SceneryManager> sceneryManagerDataSource;
+        [SerializeField] private Level level1;
 
         private void OnEnable()
         {
@@ -28,7 +31,10 @@ namespace Game
         {
             if (id == playId)
             {
-                Debug.Log($"Player selected to play the game :D");
+                if (sceneryManagerDataSource != null && sceneryManagerDataSource.Value != null)
+                {
+                    sceneryManagerDataSource.Value.ChangeLevel(level1);
+                }
             }
             else if (id == exitId)
             {
